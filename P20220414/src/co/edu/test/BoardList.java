@@ -67,21 +67,22 @@ public class BoardList {
 	}
 
 	// 작성자조회
-	public Board searchWrBoard(String bWriter) {
-		for(int i=0; i <boards.length; i++) {
-			if(boards[i].getWriter() == bWriter) {
-				String wr =boards[i].getWriter();
-				boards[i].setWriter(wr);
-				
-				
-				return boards[i];
+	public Board[] searchWrBoard(String Writer) {
+		Board[] wr = new Board[5];
+		
+		for(int i=0; i <boards.length; i++) { // 찾을 대상 배열
+			if(boards[i] != null && boards[i].getWriter().equals(Writer)) {
+				for(int j=0; j<wr.length; j++) { // 이름 조회해 반환할 배열
+					if(wr[j] == null) {
+						wr[j] = boards[i];
+						break;
+					}
+				}
+//				return boards;
 			}
 		}
-		return null;
+		return wr;
 	}
-//	}if (boards[i].getBoardNo() == board.getBoardNo()) {
-//		boards[i].setContent(board.getContent());
-//		boards[i].setTitle(board.getTitle());
-	
+
 	
 }

@@ -1,5 +1,6 @@
 package co.edu.test;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BoardEx {
@@ -13,7 +14,12 @@ public class BoardEx {
 		while (true) {
 			System.out.println("1.추가, 2.수정, 3.목록, 4.삭제, 5.한건조회, 6.이름조회, 9.종료");
 			System.out.println("선택");
-			int menu = scanner.nextInt();
+			int menu = -1;
+			try {
+				menu = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("숫자 입력");
+			}
 			scanner.nextLine();
 
 			if (menu == 1) {
@@ -83,16 +89,17 @@ public class BoardEx {
 					getBoard.getDetailInfo();
 				}
 			} else if (menu == 6) {
-				Board[] boards = boardList.boardList();
 				System.out.println("작성자조회");
-				String bWriter = scanner.nextLine();
-				for (Board board : boards) {
-
+				String sWriter = scanner.nextLine();
+				Board[] wr = boardList.searchWrBoard(sWriter);
+				// writerList 출력
+				System.out.println("게시글번호   제목        내용          사용자   조회수");
+				System.out.println("###################################################");
+				for (Board board : wr) {
 					if (board != null) {
 						board.getInfo();
 					}
 				}
-				
 
 			} else if (menu == 9) {
 				System.out.println("종료");
